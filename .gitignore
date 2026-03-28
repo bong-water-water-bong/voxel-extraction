@@ -1,0 +1,29 @@
+# Godot
+.godot/
+*.import
+export.cfg
+export_presets.cfg
+
+# Build
+build/
+*.exe
+*.x86_64
+*.pck
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Blender
+*.blend1
+
+# Voxel editor backups
+*.vox.bak
