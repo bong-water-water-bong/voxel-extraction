@@ -24,23 +24,23 @@ class_name DungeonPack
 @export var fog_density: float = 0.03
 
 # Generation rules
-@export var min_rooms: int = 8
-@export var max_rooms: int = 20
+@export var min_rooms: int = 18
+@export var max_rooms: int = 35
 @export var min_room_size: Vector3i = Vector3i(5, 4, 5)
 @export var max_room_size: Vector3i = Vector3i(15, 8, 15)
 @export var depth_range: Vector2i = Vector2i(2, 25)  # Y range for room placement
 @export var corridor_width: int = 3
-@export var extraction_count: Vector2i = Vector2i(2, 3)
+@export var extraction_count: Vector2i = Vector2i(3, 5)
 
 # Difficulty
-@export var base_enemy_count: int = 3
+@export var base_enemy_count: int = 4
 @export var enemy_scaling: float = 1.0  # Multiplier per difficulty level
 @export var boss_health_multiplier: float = 5.0
 @export var loot_quality_bonus: int = 0  # Added to difficulty for loot rolls
 
 # Raid rules
-@export var raid_duration: float = 900.0  # 15 minutes
-@export var extraction_time: float = 15.0  # Seconds to extract
+@export var raid_duration: float = 2400.0  # 40 minutes
+@export var extraction_time: float = 20.0  # Seconds to extract
 @export var enemy_surge_on_extract: bool = true
 
 # Enemy types available in this pack

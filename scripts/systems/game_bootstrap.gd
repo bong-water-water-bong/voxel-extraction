@@ -78,12 +78,13 @@ func _process(_delta: float) -> void:
 	# Keep chunks loaded around player
 	chunk_manager.update_around_player(player.global_position)
 
-	# Update extraction panic based on remaining time
+	# Update extraction panic — ramps up in the last 10 minutes
 	if GameManager.state == GameManager.GameState.IN_RAID:
 		var time_left := GameManager.get_raid_time_remaining()
-		var total := current_pack.raid_duration
-		var panic := 1.0 - (time_left / total)
-		panic = clamp(panic * panic, 0.0, 1.0)  # Exponential ramp
+		var panic := 0.0
+		if time_left < 600.0:  # Last 10 minutes
+			panic = 1.0 - (time_left / 600.0)
+			panic = clamp(panic * panic, 0.0, 1.0)  # Exponential ramp
 		var env := $WorldEnvironment as VoxelWorldEnvironment
 		if env:
 			env.set_extraction_panic(panic)

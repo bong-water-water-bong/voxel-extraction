@@ -14,7 +14,7 @@ enum GameState {
 
 var state: GameState = GameState.MENU
 var raid_timer: float = 0.0
-var raid_duration: float = 900.0  # 15 minute raids
+var raid_duration: float = 2400.0  # 40 minute levels
 var difficulty: int = 1
 var players: Array[PlayerController] = []
 
@@ -31,10 +31,16 @@ func _process(delta: float) -> void:
 		raid_timer_updated.emit(raid_timer)
 
 		# Warnings at time thresholds
-		if raid_timer <= 120.0 and raid_timer > 119.0:
-			raid_warning.emit("2 MINUTES — GET TO EXTRACTION")
+		if raid_timer <= 600.0 and raid_timer > 599.0:
+			raid_warning.emit("10 MINUTES REMAINING")
+		elif raid_timer <= 300.0 and raid_timer > 299.0:
+			raid_warning.emit("5 MINUTES — START HEADING TO EXTRACTION")
+		elif raid_timer <= 120.0 and raid_timer > 119.0:
+			raid_warning.emit("2 MINUTES — GET TO EXTRACTION NOW")
+		elif raid_timer <= 60.0 and raid_timer > 59.0:
+			raid_warning.emit("60 SECONDS — RUN")
 		elif raid_timer <= 30.0 and raid_timer > 29.0:
-			raid_warning.emit("30 SECONDS — EXTRACT NOW OR LOSE EVERYTHING")
+			raid_warning.emit("30 SECONDS — EXTRACT OR LOSE EVERYTHING")
 		elif raid_timer <= 0.0:
 			_raid_expired()
 

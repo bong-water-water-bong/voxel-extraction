@@ -12,11 +12,11 @@ class_name DungeonGenerator
 ## the packs/ folder and it just works.
 
 const MIN_ROOM_SIZE := Vector3i(5, 4, 5)
-const MAX_ROOM_SIZE := Vector3i(15, 8, 15)
+const MAX_ROOM_SIZE := Vector3i(20, 10, 20)
 const CORRIDOR_WIDTH := 3
 const CORRIDOR_HEIGHT := 3
-const MAX_ROOMS := 20
-const MIN_ROOMS := 8
+const MAX_ROOMS := 35
+const MIN_ROOMS := 18
 
 var rng: RandomNumberGenerator
 var rooms: Array[DungeonRoom] = []
@@ -82,8 +82,8 @@ func _generate_room() -> DungeonRoom:
 		rng.randi_range(MIN_ROOM_SIZE.z, MAX_ROOM_SIZE.z),
 	)
 
-	# Position — spread across the dungeon area
-	var spread := 80
+	# Position — spread across the dungeon area (larger for 40 min levels)
+	var spread := 140
 	room.position = Vector3i(
 		rng.randi_range(-spread, spread),
 		rng.randi_range(2, 20),  # Underground
@@ -202,7 +202,7 @@ func _assign_room_roles() -> void:
 		distances.append({"index": i, "distance": dist})
 	distances.sort_custom(func(a, b): return a["distance"] > b["distance"])
 
-	var extract_count := rng.randi_range(2, min(3, distances.size()))
+	var extract_count := rng.randi_range(3, min(5, distances.size()))
 	for i in extract_count:
 		var idx: int = distances[i]["index"]
 		rooms[idx].role = DungeonRoom.Role.EXTRACTION

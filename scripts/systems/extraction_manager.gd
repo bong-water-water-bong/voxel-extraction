@@ -4,7 +4,7 @@ extends Node
 ## Players must reach an extraction point, hold position, and survive
 ## a timed extraction while enemies converge on the zone.
 
-@export var extraction_time: float = 15.0  # Seconds to extract
+@export var extraction_time: float = 20.0  # Seconds to extract
 @export var enemy_surge_multiplier: float = 3.0  # Enemies ramp up during extraction
 
 var extraction_zones: Array[Area3D] = []
