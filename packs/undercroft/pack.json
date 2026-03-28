@@ -1,0 +1,69 @@
+{
+  "pack_id": "undercroft",
+  "pack_name": "The Undercroft",
+  "description": "Ancient stone halls beneath the surface. What sleeps here has been waiting.",
+  "author": "halo-ai studios",
+  "version": "1.0.0",
+  "price": "included",
+
+  "theme": {
+    "wall_block": "cobblestone",
+    "floor_block": "stone",
+    "ceiling_block": "mossy_stone",
+    "accent_block": "iron_ore",
+    "light_block": "lantern",
+    "ambient_color": [0.05, 0.04, 0.06],
+    "fog_color": [0.08, 0.06, 0.10],
+    "fog_density": 0.03
+  },
+
+  "generation": {
+    "min_rooms": 8,
+    "max_rooms": 20,
+    "min_room_size": [5, 4, 5],
+    "max_room_size": [15, 8, 15],
+    "depth_range": [2, 25],
+    "corridor_width": 3,
+    "extraction_count": [2, 3]
+  },
+
+  "difficulty": {
+    "base_enemy_count": 3,
+    "enemy_scaling": 1.0,
+    "boss_health_multiplier": 5.0,
+    "loot_quality_bonus": 0
+  },
+
+  "raid": {
+    "duration_seconds": 900,
+    "extraction_time_seconds": 15,
+    "enemy_surge_on_extract": true
+  },
+
+  "enemies": {
+    "types": ["skeleton", "crawler", "guardian"],
+    "boss": "warden",
+    "spawn_rules": {
+      "skeleton": {"min_per_room": 1, "max_per_room": 3, "health": 40, "damage": 12},
+      "crawler": {"min_per_room": 1, "max_per_room": 4, "health": 25, "damage": 8, "speed": 6.0},
+      "guardian": {"min_per_room": 0, "max_per_room": 1, "health": 80, "damage": 20, "speed": 3.0},
+      "warden": {"health": 500, "damage": 35, "speed": 4.0, "abilities": ["ground_slam", "summon_crawlers", "enrage"]}
+    }
+  },
+
+  "loot": {
+    "containers_per_loot_room": [3, 6],
+    "bonus_items": [
+      {"id": "undercroft_key", "name": "Undercroft Key", "rarity": "rare", "weight": 0.1, "value": 150, "category": "key"},
+      {"id": "warden_core", "name": "Warden's Core", "rarity": "legendary", "weight": 3.0, "value": 5000, "category": "artifact"},
+      {"id": "ancient_tablet", "name": "Ancient Tablet", "rarity": "epic", "weight": 1.0, "value": 800, "category": "artifact"}
+    ]
+  },
+
+  "audio": {
+    "ambient": "undercroft_ambient",
+    "combat": "undercroft_combat",
+    "boss": "undercroft_boss",
+    "extraction": "extraction_tension"
+  }
+}
