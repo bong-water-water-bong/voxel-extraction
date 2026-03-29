@@ -13,6 +13,7 @@ config/icon="res://assets/ui/icon.svg"
 
 [autoload]
 
+AntiCheat="*res://scripts/anticheat/anticheat_autoload.gd"
 GameManager="*res://scripts/systems/game_manager.gd"
 ExtractionManager="*res://scripts/systems/extraction_manager.gd"
 LootTable="*res://scripts/systems/loot_table.gd"

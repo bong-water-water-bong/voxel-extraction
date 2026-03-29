@@ -18,12 +18,25 @@ class_name PlayerController
 @onready var hud: Control = $HUD
 @onready var hand: Node3D = $Camera3D/Hand
 
-var health: int
-var stamina: float
+# Guarded values — encrypted in RAM, invisible to memory scanners
+var _guarded_health: GuardedValue
+var _guarded_stamina: GuardedFloat
+var _guarded_carry_weight: GuardedFloat
+
+# Public accessors (read through encryption)
+var health: int:
+	get: return _guarded_health.get_value()
+	set(v): _guarded_health.set_value(v)
+var stamina: float:
+	get: return _guarded_stamina.get_value()
+	set(v): _guarded_stamina.set_value(v)
+var carry_weight: float:
+	get: return _guarded_carry_weight.get_value()
+	set(v): _guarded_carry_weight.set_value(v)
+
 var is_sprinting: bool = false
 var is_dead: bool = false
 var inventory: Array[Dictionary] = []
-var carry_weight: float = 0.0
 var max_carry_weight: float = 50.0
 
 signal health_changed(new_health: int)
@@ -33,9 +46,17 @@ signal item_picked_up(item: Dictionary)
 signal extraction_started()
 
 func _ready() -> void:
-	health = max_health
-	stamina = max_stamina
+	# Initialize encrypted value storage
+	_guarded_health = GuardedValue.new(max_health, "health")
+	_guarded_stamina = GuardedFloat.new(max_stamina, "stamina")
+	_guarded_carry_weight = GuardedFloat.new(0.0, "carry_weight")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	# Start anti-cheat monitoring
+	if has_node("/root/AntiCheat"):
+		var ac: AntiCheatMonitor = get_node("/root/AntiCheat")
+		ac.start_monitoring(self)
+		item_picked_up.connect(func(_item): ac.on_item_picked())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead:
